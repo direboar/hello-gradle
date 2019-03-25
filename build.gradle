@@ -1,1 +1,30 @@
 apply plugin: 'java'
+apply plugin: 'eclipse'     //Eclipse IDE が利用するファイルを生成し、 (ファイル - インポート... - 既存プロジェクトをワークスペースへ で) Eclipse 内にプロジェクトをインポートできるようにします。 
+apply plugin: 'application' //アプリケーションを実行することができるようにするプラグイン。
+
+mainClassName = 'hello.HelloWorld' //applicationプラグインが実行するメインクラス
+
+// JDK
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+// リポジトリに、maven centralを追加。
+repositories {
+    mavenCentral()
+}
+
+//dependencyの定義
+dependencies {
+    //コンパイル時のdependency
+    compile "joda-time:joda-time:2.2"
+    //テスト時に追加するdependency
+    testCompile "junit:junit:4.12"
+}
+//参考：providedCompile（コンパイル時に必要だが、デプロイ時にはAPサーバなどに存在するので不要）もある。
+
+//jar成果物の定義
+jar {
+    baseName = 'gs-gradle'
+    version =  '0.1.0'
+}
+
